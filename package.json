@@ -25,7 +25,6 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@typescript-eslint/eslint-plugin": "^6.12.0",
-    "babel-jest": "^29.7.0",
     "eslint": "^8",
     "eslint-config-next": "14.0.3",
     "eslint-config-prettier": "^9.0.0",
@@ -33,11 +32,12 @@
     "jest-css-modules": "^2.1.0",
     "jest-environment-jsdom": "^29.7.0",
     "prettier": "^3.1.0",
-    "typescript": "^5"
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.3.2"
   },
   "jest": {
     "testMatch": [
-      "**/test/**/*.test.ts"
+      "**/test/**/*.test.[tj]s?(x)"
     ],
     "testPathIgnorePatterns": [
       "<rootDir>/.next/",
