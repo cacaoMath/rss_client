@@ -36,6 +36,9 @@
     "typescript": "^5"
   },
   "jest": {
+    "testMatch": [
+      "**/test/**/*.test.ts"
+    ],
     "testPathIgnorePatterns": [
       "<rootDir>/.next/",
       "<rootDir>/node_modules/"
