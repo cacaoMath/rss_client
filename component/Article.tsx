@@ -21,7 +21,7 @@ export default function Article(props: ArticleProps): React.ReactNode {
         <Typography>{props.summary}</Typography>
       </CardContent>
       <CardActions>
-        <Link href={props.link}>
+        <Link href={props.link} target="_blank" rel="noreferrer">
           <Button>{linkButtonWord}</Button>
         </Link>
       </CardActions>
