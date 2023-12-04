@@ -12,7 +12,7 @@ const articleProps: ArticleProps = {
 export default function Home() {
   return (
     <main className={styles.main}>
-      <Stack>
+      <Stack sx={{ width: '75%' }}>
         <Article {...articleProps} />
       </Stack>
     </main>

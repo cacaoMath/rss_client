@@ -14,11 +14,15 @@ export default function Article(props: ArticleProps): React.ReactNode {
   // const url: UrlObject = new URL('/', props.link);
   // console.log(url);
   return (
-    <Card>
+    <Card sx={{ width: 'auto' }}>
       <CardContent>
-        <Typography>{props.title}</Typography>
-        <Typography>{props.published}</Typography>
-        <Typography>{props.summary}</Typography>
+        <Typography variant="h5" gutterBottom>
+          {props.title}
+        </Typography>
+        <Typography variant="subtitle2" gutterBottom>
+          {props.published}
+        </Typography>
+        <Typography variant="body1">{props.summary}</Typography>
       </CardContent>
       <CardActions>
         <Link href={props.link} target="_blank" rel="noreferrer">
