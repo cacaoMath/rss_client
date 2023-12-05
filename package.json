@@ -41,6 +41,15 @@
     "typescript": "^5.3.2"
   },
   "jest": {
+    "preset": "ts-jest",
+    "transform": {
+      "^.+\\.tsx?$": [
+        "ts-jest",
+        {
+          "tsconfig": "./tsconfig.jest.json"
+        }
+      ]
+    },
     "testMatch": [
       "**/test/**/*.test.[tj]s?(x)"
     ],
@@ -49,7 +58,8 @@
       "<rootDir>/node_modules/"
     ],
     "moduleNameMapper": {
-      "\\.(css)$": "<rootDir>/node_modules/jest-css-modules"
+      "\\.(css)$": "<rootDir>/node_modules/jest-css-modules",
+      "^@/(.+)": "<rootDir>/src/$1"
     }
   },
   "engines": {
