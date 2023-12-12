@@ -7,19 +7,14 @@ interface FeedData {
   is_active: boolean;
 }
 
-interface FeedsResponse {
-  status: number;
-  data: (FeedData | string | unknown)[];
-}
-
 interface CategoryData {
   text: 'string';
   id: 0;
 }
 
-interface CategoriesResponse {
+interface Response<T> {
   status: number;
-  data: (CategoryData | string | unknown)[];
+  data: (T | string | unknown)[];
 }
 
 export class RssApi {
@@ -27,7 +22,7 @@ export class RssApi {
     axios.defaults.baseURL = url;
   }
 
-  async getFeeds(): Promise<FeedsResponse> {
+  async getFeeds(): Promise<Response<FeedData>> {
     try {
       const response: AxiosResponse = await axios.get('/feeds');
       return { status: response.status, data: response.data };
@@ -48,7 +43,7 @@ export class RssApi {
     }
   }
 
-  async getCategories(): Promise<CategoriesResponse> {
+  async getCategories(): Promise<Response<CategoryData>> {
     try {
       const response: AxiosResponse = await axios.get('/categories');
       return { status: response.status, data: response.data };
