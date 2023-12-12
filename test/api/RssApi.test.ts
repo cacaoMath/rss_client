@@ -8,7 +8,6 @@ const axiosMock = axios as jest.Mocked<typeof axios>;
 
 //get /Feedsで想定しうるエラーは200か500のみ
 describe('RssApi getFeeds test', () => {
-  afterEach(() => jest.restoreAllMocks());
   it('リクエストが200 OK', async () => {
     const mockResponse = {
       status: 200,
