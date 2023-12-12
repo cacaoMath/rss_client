@@ -40,3 +40,34 @@ describe('RssApi getFeeds test', () => {
     expect(rssApiResponse.status).toEqual(500);
   });
 });
+
+//get /categoriesで想定しうるエラーは200か500のみ
+describe('RssApi getCategories test', () => {
+  it('リクエストが200 OK', async () => {
+    const mockResponse = {
+      status: 200,
+      data: [
+        {
+          text: 'aaa',
+          id: 1,
+        },
+        {
+          text: 'bbb',
+          id: 2,
+        },
+      ],
+    };
+    axiosMock.get.mockResolvedValue(mockResponse);
+    const rssApiResponse = await rssApi.getFeeds();
+    expect(rssApiResponse.data).toEqual(mockResponse.data);
+    expect(rssApiResponse.status).toEqual(200);
+  });
+
+  it('500 error', async () => {
+    (axiosMock.isAxiosError as unknown) = jest.fn().mockReturnValue(true);
+    axiosMock.get.mockRejectedValue({ response: { status: 500, data: undefined } });
+    const rssApiResponse = await rssApi.getFeeds();
+    expect(rssApiResponse.data).toEqual(['server error']);
+    expect(rssApiResponse.status).toEqual(500);
+  });
+});
