@@ -8,8 +8,8 @@ interface FeedData {
 }
 
 interface CategoryData {
-  text: 'string';
-  id: 0;
+  text: string;
+  id: number;
 }
 
 interface RssData {
