@@ -29,6 +29,7 @@ export default function Home() {
 
   if (isLoading) return <p>loading</p>;
   if (isError) return <p>error</p>;
+  if (rssData?.status != 200) return <p>予期せぬエラーが発生しました</p>;
   return (
     <Stack>
       {rssData?.data.map((value, key) => {
