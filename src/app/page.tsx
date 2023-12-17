@@ -27,9 +27,15 @@ export default function Home() {
     enabled: !!categories,
   });
 
-  if (isLoading) return <p>loading</p>;
+  if (isLoading) {
+    return <p>loading</p>;
+  } else {
+    if (rssData?.status !== undefined && rssData.status != 200) {
+      console.log(rssData?.status);
+      return <p>予期せぬエラーが発生しました</p>;
+    }
+  }
   if (isError) return <p>error</p>;
-  if (rssData?.status != 200) return <p>予期せぬエラーが発生しました</p>;
   return (
     <Stack spacing={2} sx={{ p: 1, m: 1, width: 'auto' }}>
       {rssData?.data.map((value, key) => {
