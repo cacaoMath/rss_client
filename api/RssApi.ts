@@ -7,19 +7,19 @@ interface FeedData {
   is_active: boolean;
 }
 
-interface CategoryData {
+export interface CategoryData {
   text: string;
   id: number;
 }
 
-interface RssData {
+export interface RssData {
   title: string;
   link: string;
   summary: string;
   published: string;
 }
 
-interface Response<T> {
+export interface Response<T> {
   status: number;
   data: (T | string | unknown)[];
 }
@@ -71,7 +71,7 @@ export class RssApi {
     }
   }
 
-  async postRss(categories: [string]): Promise<Response<RssData>> {
+  async postRss(categories: string[]): Promise<Response<RssData>> {
     try {
       const response = await axios.post('/rss', { categories: categories });
       return response;
