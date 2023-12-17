@@ -31,7 +31,7 @@ export default function Home() {
   if (isError) return <p>error</p>;
   if (rssData?.status != 200) return <p>予期せぬエラーが発生しました</p>;
   return (
-    <Stack>
+    <Stack spacing={2} sx={{ p: 1, m: 1, width: 'auto' }}>
       {rssData?.data.map((value, key) => {
         const rssValue = value as RssData;
         return <Article articleData={rssValue} key={key}></Article>;
