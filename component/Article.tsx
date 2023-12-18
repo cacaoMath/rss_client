@@ -4,16 +4,15 @@ import { RssData } from '../api/RssApi';
 
 export interface ArticleProps {
   articleData: RssData;
-  key: number;
 }
 
 const linkButtonWord: string = '元記事へ';
 
-export default function Article({ articleData, key }: ArticleProps): React.ReactNode {
+export default function Article({ articleData }: ArticleProps): React.ReactNode {
   // const url: UrlObject = new URL('/', props.link);
   // console.log(url);
   return (
-    <Card sx={{ width: 'auto' }} key={key}>
+    <Card sx={{ width: 'auto' }}>
       <CardContent>
         <Typography variant="h5" gutterBottom>
           {articleData.title}
