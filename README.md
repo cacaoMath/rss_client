@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# My Rss Client
 
-## Getting Started
+https://github.com/cacaoMath/rss_collect_api で作成したapiを使って、RSSを読むためのアプリ
 
-First, run the development server:
+## 開発
+
+開発サーバ起動は以下:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+パッケージのインストールは
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm ci
+# or
+npm i
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+[http://localhost:3000](http://localhost:3000) でページを確認することができる。
 
-## Learn More
+## 概要
 
-To learn more about Next.js, take a look at the following resources:
+https://github.com/cacaoMath/rss_collect_api で作成したapiを使って、RSSの記事を読む用のwebアプリ
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### アプリの構成
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+コンポーネントはMUIを使用している
 
-## Deploy on Vercel
+- https://mui.com/
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+フレームワークはNextでapp routerを使う
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- https://nextjs.org/
+
+APIとの通信とアプリでの処理はAxios + Tan Stack Queryを使う
+
+- https://axios-http.com/
+- https://tanstack.com/
+
+使用言語はTypeScript
+テストはJest
+
+エラーなどは https://rss-api.cacaomath.com/docs で定義されたものを基本的にはひろう。
+それ以外は、今のところrequest時のエラーと、それら以外の予想外のエラーで分けることとしている。 (今ある実装は api/RssApi.ts )
+
+### 画面構成
+
+現在の画面構成(予定も含む)は以下
+
+![](document/rss_client画面遷移図.png)
+
+### 今後の予定
+
+- 記事一覧をジャンルごとに変えられるようにしたい
+- Firebase(cognitoとかでも)で認証機能をもってもらい、認証が必要な機能を追加する(ユーザーやユーザーごとの記事保存とか、いろいろなデータ更新の伴う機能)
