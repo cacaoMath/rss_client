@@ -4,7 +4,8 @@ import { CategoryData, RssApi, RssData } from '@/../api/RssApi';
 import { useQuery } from '@tanstack/react-query';
 import Article from '@/../component/Article';
 
-const rssApi = new RssApi('http://localhost:8000');
+const url = process.env.NEXT_PUBLIC_RSSAPI_URL;
+const rssApi = new RssApi(url);
 
 export default function Home() {
   const { data: categoryRes } = useQuery({

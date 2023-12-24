@@ -25,7 +25,7 @@ export interface Response<T> {
 }
 
 export class RssApi {
-  constructor(url: string) {
+  constructor(url: string = 'http://localhost:3000') {
     axios.defaults.baseURL = url;
   }
 
