@@ -13,6 +13,7 @@ import {
 } from '@mui/material';
 import React from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
+import MyLink from './MyLink';
 
 const title: string = 'rss';
 
@@ -86,8 +87,12 @@ function MenuListComposition() {
                   aria-labelledby="composition-button"
                   onKeyDown={handleListKeyDown}
                 >
-                  <MenuItem onClick={handleClose}>Home</MenuItem>
-                  <MenuItem onClick={handleClose}>Registered Feeds</MenuItem>
+                  <MenuItem onClick={handleClose}>
+                    <MyLink href="/" text="Home" />
+                  </MenuItem>
+                  <MenuItem onClick={handleClose}>
+                    <MyLink href="/feeds" text="Feeds" />
+                  </MenuItem>
                 </MenuList>
               </ClickAwayListener>
             </Paper>
