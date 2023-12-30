@@ -1,11 +1,9 @@
 'use client';
 import { Stack } from '@mui/material';
-import { CategoryData, RssApi, RssData } from '@/../api/RssApi';
+import { CategoryData, RssData } from '@/../api/RssApi';
 import { useQuery } from '@tanstack/react-query';
 import Article from '@/../component/Article';
-
-const url = process.env.NEXT_PUBLIC_RSSAPI_URL;
-const rssApi = new RssApi(url);
+import { rssApi } from '@/../config/setup';
 
 export default function Home() {
   const { data: categoryRes } = useQuery({
