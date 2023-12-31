@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 
-interface FeedData {
+export interface FeedData {
   url: string;
   description: string;
   id: number;
