@@ -1,5 +1,15 @@
 'use client';
-import { List, ListItem, ListItemAvatar, Avatar, ListItemText, Stack, Grid } from '@mui/material';
+import {
+  List,
+  ListItem,
+  ListItemAvatar,
+  Avatar,
+  ListItemText,
+  Grid,
+  Box,
+  Stack,
+  Typography,
+} from '@mui/material';
 import React from 'react';
 import { Link } from '@mui/icons-material';
 
@@ -14,23 +24,29 @@ function generateListItem(list: string[]) {
 
 export default function Feeds(): React.ReactNode {
   return (
-    <Grid
-      container
-      sx={{
-        justifyContent: 'space-between',
-        p: 1,
-        m: 1,
-        bgcolor: 'background.paper',
-        borderRadius: 1,
-        width: '50%',
-      }}
-    >
-      <Stack spacing={2} sx={{ p: 1, m: 1, width: 'auto' }}>
-        <Avatar>
-          <Link />
-        </Avatar>
-        <List>{generateListItem(['a', 'i', 'u'])}</List>
-      </Stack>
+    <Grid container spacing={3}>
+      <Grid item xs={3}>
+        <Box />
+      </Grid>
+      <Grid item xs={6}>
+        <Box
+          sx={{
+            p: 1,
+            m: 4,
+          }}
+        >
+          <Stack direction="row" spacing={2}>
+            <Avatar>
+              <Link />
+            </Avatar>
+            <Typography variant="h4">Registerd Feed Link</Typography>
+          </Stack>
+          <List>{generateListItem(['a', 'i', 'u'])}</List>
+        </Box>
+      </Grid>
+      <Grid item xs={3}>
+        <Box />
+      </Grid>
     </Grid>
   );
 }
