@@ -7,11 +7,11 @@ import {
   ListItemText,
   Grid,
   Box,
-  Stack,
   Typography,
+  Link,
 } from '@mui/material';
 import React from 'react';
-import { Link } from '@mui/icons-material';
+import { Link as LinkIcon } from '@mui/icons-material';
 import { useQuery } from '@tanstack/react-query';
 import { rssApi } from '../../../config/setup';
 import { FeedData } from '@/../api/RssApi';
@@ -19,7 +19,13 @@ import { FeedData } from '@/../api/RssApi';
 function generateListItem(list: FeedData[] | undefined) {
   return list?.map((value) => (
     <ListItem key={value.id}>
-      <ListItemAvatar></ListItemAvatar>
+      <ListItemAvatar>
+        <Avatar>
+          <Link href={value.url}>
+            <LinkIcon />
+          </Link>
+        </Avatar>
+      </ListItemAvatar>
       <ListItemText primary={value.url} secondary={value.description} />
     </ListItem>
   ));
@@ -43,14 +49,14 @@ export default function Feeds(): React.ReactNode {
           sx={{
             p: 1,
             m: 4,
+            backgroundColor: 'background.paper',
+            borderRadius: '10px',
+            width: 'auto',
           }}
         >
-          <Stack direction="row" spacing={2}>
-            <Avatar>
-              <Link />
-            </Avatar>
-            <Typography variant="h4">Registerd Feed Link</Typography>
-          </Stack>
+          <Typography variant="h4" align="center">
+            Registerd Feed Link
+          </Typography>
           <List>{generateListItem(feeds)}</List>
         </Box>
       </Grid>
