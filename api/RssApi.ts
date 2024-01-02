@@ -74,7 +74,7 @@ export class RssApi {
   async postRss(categories: string[]): Promise<Response<RssData>> {
     try {
       const response = await axios.post('/rss', { categories: categories });
-      return response;
+      return { status: response.status, data: response.data };
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.status) {
