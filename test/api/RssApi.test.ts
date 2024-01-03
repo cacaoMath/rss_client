@@ -58,7 +58,7 @@ describe('RssApi getCategories test', () => {
       ],
     };
     axiosMock.get.mockResolvedValue(mockResponse);
-    const rssApiResponse = await rssApi.getFeeds();
+    const rssApiResponse = await rssApi.getCategories();
     expect(rssApiResponse.data).toEqual(mockResponse.data);
     expect(rssApiResponse.status).toEqual(200);
   });
@@ -66,7 +66,7 @@ describe('RssApi getCategories test', () => {
   it('500 error', async () => {
     (axiosMock.isAxiosError as unknown) = jest.fn().mockReturnValue(true);
     axiosMock.get.mockRejectedValue({ response: { status: 500, data: undefined } });
-    const rssApiResponse = await rssApi.getFeeds();
+    const rssApiResponse = await rssApi.getCategories();
     expect(rssApiResponse.data).toEqual(['server error']);
     expect(rssApiResponse.status).toEqual(500);
   });
