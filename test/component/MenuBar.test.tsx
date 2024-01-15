@@ -1,6 +1,9 @@
 import Menubar from '@/../component/MenuBar';
 import { fireEvent, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
+
+const user = userEvent.setup();
 
 describe('MenuBar componentのテスト', () => {
   it('tieleの文言が表示されている', () => {
@@ -22,6 +25,26 @@ describe('MenuBar componentのテスト', () => {
       fireEvent.click(hambetgarButton);
       expect(screen.getByText('Home')).toBeInTheDocument();
       expect(screen.getByText('Feeds')).toBeInTheDocument();
+    });
+    it('メニューボタンが開いてTabで閉じる', async () => {
+      render(<Menubar />);
+      const hambetgarButton = screen.getByRole('button');
+      fireEvent.click(hambetgarButton);
+      expect(screen.getByText('Home')).toBeInTheDocument();
+      expect(screen.getByText('Feeds')).toBeInTheDocument();
+      await user.tab();
+      expect(screen.queryByText('Home')).toBeNull();
+      expect(screen.queryByText('Feeds')).toBeNull();
+    });
+    it('メニューボタンが開いてEscapeで閉じる', async () => {
+      render(<Menubar />);
+      const hambetgarButton = screen.getByRole('button');
+      fireEvent.click(hambetgarButton);
+      expect(screen.getByText('Home')).toBeInTheDocument();
+      expect(screen.getByText('Feeds')).toBeInTheDocument();
+      await user.keyboard('[Escape]');
+      expect(screen.queryByText('Home')).toBeNull();
+      expect(screen.queryByText('Feeds')).toBeNull();
     });
   });
 });
