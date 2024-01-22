@@ -1,0 +1,19 @@
+name: remote ssh command
+
+on:
+  push:
+    tags:
+      - v*
+jobs:
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOSTDEPLOY_HOST }}
+          username: ${{ secrets.USERNAMEDEPLOY_SSH_USER }}
+          passphrase: ${{ secrets.PASSPHRASEDEPLOY_SSH_PASSPHRASE }}
+          script: |
+            whoami
