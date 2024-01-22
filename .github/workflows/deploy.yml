@@ -19,5 +19,6 @@ jobs:
           proxy_host: ${{ secrets.DEPLOY_PROXY_HOST }}
           proxy_username: ${{ secrets.DEPLOY_PROXY_USER }}
           proxy_port: ${{ secrets.DEPLOY_PROXY_PORT }}
+          proxy_password: ${{ secrets.DEPLOY_PROXY_PASSWORD }}
           script: |
             whoami
