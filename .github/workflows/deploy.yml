@@ -16,5 +16,8 @@ jobs:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_SSH_USER }}
           passphrase: ${{ secrets.DEPLOY_SSH_PASSPHRASE }}
+          proxy_host: ${{ secrets.DEPLOY_PROXY_HOST }}
+          proxy_username: ${{ secrets.DEPLOY_PROXY_USER }}
+          proxy_port: ${{ secrets.DEPLOY_PROXY_PORT }}
           script: |
             whoami
