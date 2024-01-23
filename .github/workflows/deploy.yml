@@ -9,6 +9,9 @@ jobs:
     name: deploy
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+      - name: get tag name
+        run: echo "TAG_NAME=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
       - name: build & start app
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -21,9 +24,8 @@ jobs:
           port: ${{ secrets.DEPLOY_SSH_PORT }}
           password: ${{ secrets.DEPLOY_SSH_PASSWORD }}
           script: |
-            echo "${GITHUB_REF##*/}"
             kill $(ps -e -o pid,cmd | grep "npm start" | grep -v grep | awk '{ print $1 }')
-            git clone git@github.com:cacaoMath/rss_client.git -b ${GITHUB_REF##*/}
+            git clone git@github.com:cacaoMath/rss_client.git -b ${TAG_NAME}
             cd rss_client
             npm ci && npm build
             nphup npm start &
