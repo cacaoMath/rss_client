@@ -9,7 +9,7 @@ jobs:
     name: deploy
     runs-on: ubuntu-latest
     steps:
-      - name: executing remote ssh commands using password
+      - name: build & start app
         uses: appleboy/ssh-action@v1.0.3
         with:
           proxy_key: ${{ secrets.DEPLOY_SSH_PROXY_SECRET_KEY }}
@@ -21,5 +21,8 @@ jobs:
           port: ${{ secrets.DEPLOY_SSH_PORT }}
           password: ${{ secrets.DEPLOY_SSH_PASSWORD }}
           script: |
-            whoami
-            ls -la
+            kill $(ps -e -o pid,cmd | grep "npm start" | grep -v grep | awk '{ print $1 }')
+            git clone git@github.com:cacaoMath/rss_client.git -b ${GITHUB_REF##*/}
+            cd rss_client
+            npm ci && npm build
+            nphup npm start &
