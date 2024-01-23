@@ -21,6 +21,7 @@ jobs:
           port: ${{ secrets.DEPLOY_SSH_PORT }}
           password: ${{ secrets.DEPLOY_SSH_PASSWORD }}
           script: |
+            echo "${GITHUB_REF##*/}"
             kill $(ps -e -o pid,cmd | grep "npm start" | grep -v grep | awk '{ print $1 }')
             git clone git@github.com:cacaoMath/rss_client.git -b ${GITHUB_REF##*/}
             cd rss_client
