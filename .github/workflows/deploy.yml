@@ -26,12 +26,12 @@ jobs:
           port: ${{ secrets.DEPLOY_SSH_PORT }}
           password: ${{ secrets.DEPLOY_SSH_PASSWORD }}
           script: |
-            ls -la
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
+            npm -v
             kill $(ps -e -o pid,cmd | grep "next-server" | grep -v grep | awk '{ print $1 }')
             git clone git@github.com:cacaoMath/rss_client.git -b ${{ env.TAG_NAME }}
             cd rss_client
-            ls
-            npm -v
             npm ci
             npm build
             nohup npm start &
