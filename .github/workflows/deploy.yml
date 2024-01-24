@@ -26,11 +26,8 @@ jobs:
           port: ${{ secrets.DEPLOY_SSH_PORT }}
           password: ${{ secrets.DEPLOY_SSH_PASSWORD }}
           script: |
-            echo ${GITHUN_REF}
-            echo $GITHUB_ENV
-            echo ${GITHUB_REF#refs/*/}
             kill $(ps -e -o pid,cmd | grep "npm start" | grep -v grep | awk '{ print $1 }')
-            git clone git@github.com:cacaoMath/rss_client.git -b ${TAG_NAME}
+            git clone git@github.com:cacaoMath/rss_client.git -b ${{ env.TAG_NAME }}
             cd rss_client
             npm ci && npm build
             nphup npm start &
