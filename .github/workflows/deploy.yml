@@ -1,0 +1,36 @@
+name: remote ssh command
+
+on:
+  push:
+    tags:
+      - v*
+jobs:
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: get tag name
+        run: |
+          echo ${GITHUB_REF}
+          echo "TAG_NAME=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+      - name: build & start app
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          proxy_key: ${{ secrets.DEPLOY_SSH_PROXY_SECRET_KEY }}
+          proxy_host: ${{ secrets.DEPLOY_SSH_PROXY_HOST }}
+          proxy_username: ${{ secrets.DEPLOY_SSH_PROXY_USER }}
+          proxy_passphrase: ${{ secrets.DEPLOY_SSH_PROXY_PASSPHRASE }}
+          host: ${{ secrets.DEPLOY_SSH_HOST }}
+          username: ${{ secrets.DEPLOY_SSH_USER }}
+          port: ${{ secrets.DEPLOY_SSH_PORT }}
+          password: ${{ secrets.DEPLOY_SSH_PASSWORD }}
+          script: |
+            source .bashrc
+            kill $(ps -e -o pid,cmd | grep "next-server" | grep -v grep | awk '{ print $1 }')
+            git clone git@github.com:cacaoMath/rss_client.git -b ${{ env.TAG_NAME }}
+            cd rss_client
+            mise use node@19
+            npm ci
+            npm build
+            nohup npm start &
